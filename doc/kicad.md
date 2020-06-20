@@ -5,7 +5,7 @@ The `kicad` subdirectory contains the design files for the emulator circuit boar
 ## Creating the circuit board
 
 There are three ways to get a circuit board.
-1. From the (shared designs)[https://oshpark.com/shared_projects/zDjWDDDL "LK201 emulator"] section of the OSHPark PCB fabricator website.
+1. From the [shared designs](https://oshpark.com/shared_projects/zDjWDDDL "LK201 emulator") section of the OSHPark PCB fabricator website.
 2. From any PCB fabricator that accepts KiCAD board files (such as OSHPark).
 3. From any PCB fabricator that doesn't, by generating the standard *Gerber* files.
 
