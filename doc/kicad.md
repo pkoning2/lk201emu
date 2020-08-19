@@ -42,6 +42,8 @@ If you don't want the key click and beep (bell) features, omit LS1, Q1, R1 and R
 | U2 | Trinket M0 | Adafruit Trinket M0 board (SAMD21) | Adafruit | 1528-2361-ND |
 | U3 | ICL3232CPZ | Dual RS232 driver/receiver, 5V supply, 120kb/s, 0C-70C | Renesas | ICL3232CPZ-ND​ |
 
+If you want to use Digikey as your supplier, the saved BOM is available [there](https://www.digikey.com/short/zrhrcz "Digikey BOM").
+
 ## Assembly suggestions
 
 I found that this order of installing the components works well:
