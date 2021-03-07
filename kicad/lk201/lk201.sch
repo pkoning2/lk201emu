@@ -1,0 +1,408 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A 11000 8500
+encoding utf-8
+Sheet 1 1
+Title "LK201 emulator"
+Date "2020-05-18"
+Rev "A"
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L LK201_symbols:Trinket_M0 U2
+U 1 1 5EC32C3C
+P 2650 3750
+F 0 "U2" H 2121 3796 50  0000 R CNN
+F 1 "Trinket M0" H 2121 3705 50  0000 R CNN
+F 2 "lk201_parts:Trinket_M0" H 2650 3750 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/doc2535.pdf" H 2650 3750 50  0001 C CNN
+F 4 "1528-2361-ND" H 2650 3750 50  0001 C CNN "Digikey"
+F 5 "Adafruit" H 2650 3750 50  0001 C CNN "Mfg"
+F 6 "3500" H 2650 3750 50  0001 C CNN "Mfg part"
+	1    2650 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L LK201_symbols:RJ22 J1
+U 1 1 5EC34B84
+P 8750 3450
+F 0 "J1" H 8420 3454 50  0000 R CNN
+F 1 "RJ22" H 8420 3545 50  0000 R CNN
+F 2 "lk201_parts:RJ22" V 8750 3500 50  0001 C CNN
+F 3 "~" V 8750 3500 50  0001 C CNN
+F 4 "​AE10381-ND" H 8750 3450 50  0001 C CNN "Digikey"
+F 5 "Assmann WSW" H 8750 3450 50  0001 C CNN "Mfg"
+F 6 "A-2004-3-4-LP-N-R" H 8750 3450 50  0001 C CNN "Mfg part"
+	1    8750 3450
+	-1   0    0    1   
+$EndComp
+$Comp
+L LK201_symbols:Audio_piezo_transducer LS1
+U 1 1 5EC38E19
+P 5400 5200
+F 0 "LS1" H 5574 5196 50  0000 L CNN
+F 1 "PS1420" H 5574 5105 50  0000 L CNN
+F 2 "lk201_parts:PS1420_buzzer" H 5365 5150 50  0001 C CNN
+F 3 "~" H 5365 5150 50  0001 C CNN
+	1    5400 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L LK201_symbols:L78L05_TO92 U1
+U 1 1 5EC39C27
+P 1900 2400
+F 0 "U1" H 1900 2642 50  0000 C CNN
+F 1 "L78L05" H 1900 2551 50  0000 C CNN
+F 2 "lk201_parts:TO-92_Inline_Narrow_Oval" H 1900 2600 50  0001 C CNN
+F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/41/4f/b3/b0/12/d4/47/88/CD00000444.pdf/files/CD00000444.pdf/jcr:content/translations/en.CD00000444.pdf" H 2000 2150 50  0001 C CNN
+	1    1900 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 2400 2750 3150
+Wire Wire Line
+	4000 3750 4000 5100
+$Comp
+L power:GND #PWR01
+U 1 1 5EC3D8F1
+P 1900 3050
+F 0 "#PWR01" H 1900 2800 50  0001 C CNN
+F 1 "GND" H 1905 2877 50  0000 C CNN
+F 2 "" H 1900 3050 50  0001 C CNN
+F 3 "" H 1900 3050 50  0001 C CNN
+	1    1900 3050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1900 3050 1900 2900
+$Comp
+L power:GND #PWR05
+U 1 1 5EC3DD01
+P 5900 4700
+F 0 "#PWR05" H 5900 4450 50  0001 C CNN
+F 1 "GND" H 5905 4527 50  0000 C CNN
+F 2 "" H 5900 4700 50  0001 C CNN
+F 3 "" H 5900 4700 50  0001 C CNN
+	1    5900 4700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5900 4700 5900 4450
+Wire Wire Line
+	3250 3450 4350 3450
+Wire Wire Line
+	4350 3450 4350 3350
+Wire Wire Line
+	4350 3350 5100 3350
+Wire Wire Line
+	3250 3550 4350 3550
+Wire Wire Line
+	4350 3550 4350 3750
+Wire Wire Line
+	4350 3750 5100 3750
+Wire Wire Line
+	1600 2400 1450 2400
+Text Label 1200 2400 0    50   ~ 0
+V12
+Wire Wire Line
+	6700 3350 8350 3350
+Wire Wire Line
+	8350 3650 7400 3650
+Wire Wire Line
+	7400 3650 7400 3750
+Wire Wire Line
+	7400 3750 6700 3750
+Wire Wire Line
+	8350 3550 8250 3550
+Wire Wire Line
+	8250 3550 8250 4000
+Wire Wire Line
+	8350 3450 8250 3450
+Wire Wire Line
+	8250 3450 8250 2800
+Text Label 8250 2950 0    50   ~ 0
+V12
+$Comp
+L power:GND #PWR07
+U 1 1 5EC4216F
+P 8250 4000
+F 0 "#PWR07" H 8250 3750 50  0001 C CNN
+F 1 "GND" H 8255 3827 50  0000 C CNN
+F 2 "" H 8250 4000 50  0001 C CNN
+F 3 "" H 8250 4000 50  0001 C CNN
+	1    8250 4000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 3750 4000 3750
+Text Label 3550 4150 0    50   ~ 0
+V3_3
+Wire Wire Line
+	3250 4150 3650 4150
+Text Label 6200 2050 0    50   ~ 0
+V3_3
+$Comp
+L LK201_symbols:ICL3232 U3
+U 1 1 5EC32F48
+P 5900 3250
+F 0 "U3" H 5900 4631 50  0000 C CNN
+F 1 "ICL3232CPZ" H 5900 4540 50  0000 C CNN
+F 2 "lk201_parts:DIP-16_296_ELL" H 5950 2200 50  0001 L CNN
+F 3 "https://www.renesas.com/us/en/document/dst/icl3221-icl3222-icl3223-icl3232-icl3241-icl3243-datasheet" H 5900 3350 50  0001 C CNN
+F 4 "ICL3232CPZ-ND​" H 5900 3250 50  0001 C CNN "Digikey"
+F 5 "Renesas" H 5900 3250 50  0001 C CNN "Mfg"
+F 6 "ICL3232CPZ" H 5900 3250 50  0001 C CNN "Mfg part"
+	1    5900 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7550 2050 7550 2150
+Wire Wire Line
+	5900 2050 7550 2050
+$Comp
+L LK201_symbols:C C4
+U 1 1 5EC4C577
+P 6950 2500
+F 0 "C4" H 7065 2546 50  0000 L CNN
+F 1 "0.1uF" H 7065 2455 50  0000 L CNN
+F 2 "lk201_parts:C_Rect_L4.0mm_W2.5mm_P2.54mm" H 6988 2350 50  0001 C CNN
+F 3 "~" H 6950 2500 50  0001 C CNN
+	1    6950 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L LK201_symbols:C C3
+U 1 1 5EC4C74A
+P 4850 2500
+F 0 "C3" H 4965 2546 50  0000 L CNN
+F 1 "0.1uF" H 4965 2455 50  0000 L CNN
+F 2 "lk201_parts:C_Rect_L4.0mm_W2.5mm_P2.54mm" H 4888 2350 50  0001 C CNN
+F 3 "~" H 4850 2500 50  0001 C CNN
+	1    4850 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L LK201_symbols:C C7
+U 1 1 5EC4C92F
+P 7550 2300
+F 0 "C7" H 7665 2346 50  0000 L CNN
+F 1 "0.1uF" H 7665 2255 50  0000 L CNN
+F 2 "lk201_parts:C_Rect_L4.0mm_W2.5mm_P2.54mm" H 7588 2150 50  0001 C CNN
+F 3 "~" H 7550 2300 50  0001 C CNN
+	1    7550 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L LK201_symbols:C C6
+U 1 1 5EC4CB26
+P 7300 2850
+F 0 "C6" V 7048 2850 50  0000 C CNN
+F 1 "0.1uF" V 7139 2850 50  0000 C CNN
+F 2 "lk201_parts:C_Rect_L4.0mm_W2.5mm_P2.54mm" H 7338 2700 50  0001 C CNN
+F 3 "~" H 7300 2850 50  0001 C CNN
+	1    7300 2850
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR06
+U 1 1 5EC4D8C5
+P 7550 4050
+F 0 "#PWR06" H 7550 3800 50  0001 C CNN
+F 1 "GND" H 7555 3877 50  0000 C CNN
+F 2 "" H 7550 4050 50  0001 C CNN
+F 3 "" H 7550 4050 50  0001 C CNN
+	1    7550 4050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6700 2350 6950 2350
+Wire Wire Line
+	6700 2650 6950 2650
+Wire Wire Line
+	6700 2850 7150 2850
+Wire Wire Line
+	7550 2450 7550 2850
+Wire Wire Line
+	7250 3150 7550 3150
+Connection ~ 7550 3150
+Wire Wire Line
+	7550 3150 7550 4050
+Wire Wire Line
+	7450 2850 7550 2850
+Connection ~ 7550 2850
+Wire Wire Line
+	7550 2850 7550 3150
+Wire Wire Line
+	5100 2350 4850 2350
+Wire Wire Line
+	5100 2650 4850 2650
+$Comp
+L power:GND #PWR02
+U 1 1 5EC5F121
+P 2650 4600
+F 0 "#PWR02" H 2650 4350 50  0001 C CNN
+F 1 "GND" H 2655 4427 50  0000 C CNN
+F 2 "" H 2650 4600 50  0001 C CNN
+F 3 "" H 2650 4600 50  0001 C CNN
+	1    2650 4600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 4600 2650 4350
+$Comp
+L power:GND #PWR04
+U 1 1 5EC697EA
+P 4950 4300
+F 0 "#PWR04" H 4950 4050 50  0001 C CNN
+F 1 "GND" H 4955 4127 50  0000 C CNN
+F 2 "" H 4950 4300 50  0001 C CNN
+F 3 "" H 4950 4300 50  0001 C CNN
+	1    4950 4300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5100 3550 4950 3550
+Wire Wire Line
+	4950 3550 4950 4300
+Wire Wire Line
+	6700 3150 6950 3150
+$Comp
+L LK201_symbols:C C5
+U 1 1 5EC4D189
+P 7100 3150
+F 0 "C5" V 6848 3150 50  0000 C CNN
+F 1 "0.1uF" V 6939 3150 50  0000 C CNN
+F 2 "lk201_parts:C_Rect_L4.0mm_W2.5mm_P2.54mm" H 7138 3000 50  0001 C CNN
+F 3 "~" H 7100 3150 50  0001 C CNN
+	1    7100 3150
+	0    1    1    0   
+$EndComp
+Text Label 2300 2400 0    50   ~ 0
+V5
+Wire Wire Line
+	2200 2400 2350 2400
+$Comp
+L LK201_symbols:C C1
+U 1 1 5EC9910A
+P 1450 2650
+F 0 "C1" H 1565 2696 50  0000 L CNN
+F 1 "0.1uF" H 1565 2605 50  0000 L CNN
+F 2 "lk201_parts:C_Rect_L4.0mm_W2.5mm_P2.54mm" H 1488 2500 50  0001 C CNN
+F 3 "~" H 1450 2650 50  0001 C CNN
+	1    1450 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L LK201_symbols:C C2
+U 1 1 5EC9A360
+P 2350 2650
+F 0 "C2" H 2465 2696 50  0000 L CNN
+F 1 "0.1uF" H 2465 2605 50  0000 L CNN
+F 2 "lk201_parts:C_Rect_L4.0mm_W2.5mm_P2.54mm" H 2388 2500 50  0001 C CNN
+F 3 "~" H 2350 2650 50  0001 C CNN
+	1    2350 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1450 2800 1450 2900
+Wire Wire Line
+	1450 2900 1900 2900
+Connection ~ 1900 2900
+Wire Wire Line
+	1900 2900 1900 2700
+Wire Wire Line
+	1900 2900 2350 2900
+Wire Wire Line
+	2350 2900 2350 2800
+Wire Wire Line
+	2350 2500 2350 2400
+Connection ~ 2350 2400
+Wire Wire Line
+	2350 2400 2750 2400
+Wire Wire Line
+	1450 2500 1450 2400
+Connection ~ 1450 2400
+Wire Wire Line
+	1450 2400 1150 2400
+NoConn ~ 2550 3150
+NoConn ~ 3250 3950
+NoConn ~ 3250 3850
+NoConn ~ 3250 3650
+NoConn ~ 6700 3550
+NoConn ~ 6700 3950
+NoConn ~ 5100 3950
+$Comp
+L LK201_symbols:2N3904 Q1
+U 1 1 5ECB9074
+P 4400 5800
+F 0 "Q1" V 4728 5800 50  0000 C CNN
+F 1 "2N3904" V 4637 5800 50  0000 C CNN
+F 2 "lk201_parts:TO-92_Inline_Narrow_Oval" H 4600 5725 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/2N/2N3904.pdf" H 4400 5800 50  0001 L CNN
+	1    4400 5800
+	0    1    -1   0   
+$EndComp
+$Comp
+L LK201_symbols:R_US R1
+U 1 1 5ECBA5B0
+P 4000 5250
+F 0 "R1" H 4068 5296 50  0000 L CNN
+F 1 "1k" H 4068 5205 50  0000 L CNN
+F 2 "lk201_parts:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 4040 5240 50  0001 C CNN
+F 3 "~" H 4000 5250 50  0001 C CNN
+F 4 "CF14JT1K00CT-ND" H 4000 5250 50  0001 C CNN "Digikey"
+F 5 "Stackpole" H 4000 5250 50  0001 C CNN "Mfg"
+F 6 "CF14JT1K00" H 4000 5250 50  0001 C CNN "Mfg part"
+	1    4000 5250
+	1    0    0    -1  
+$EndComp
+$Comp
+L LK201_symbols:R_US R2
+U 1 1 5ECBBE28
+P 4800 5250
+F 0 "R2" H 4868 5296 50  0000 L CNN
+F 1 "3.3k" H 4868 5205 50  0000 L CNN
+F 2 "lk201_parts:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 4840 5240 50  0001 C CNN
+F 3 "~" H 4800 5250 50  0001 C CNN
+F 4 "CF14JT3K30TR-ND" H 4800 5250 50  0001 C CNN "Digikey"
+F 5 "Stackpole" H 4800 5250 50  0001 C CNN "Mfg"
+F 6 "CF14JT3K30" H 4800 5250 50  0001 C CNN "Mfg part"
+	1    4800 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 5400 4000 5700
+Wire Wire Line
+	4000 5700 4200 5700
+Wire Wire Line
+	4800 5400 4800 5700
+Wire Wire Line
+	4800 5700 4600 5700
+Wire Wire Line
+	5200 5300 5200 5700
+Wire Wire Line
+	5200 5700 4800 5700
+Connection ~ 4800 5700
+Wire Wire Line
+	4800 5100 4800 4950
+Wire Wire Line
+	5200 5200 5200 4950
+Wire Wire Line
+	5200 4950 4800 4950
+Connection ~ 4800 4950
+Wire Wire Line
+	4800 4950 4800 4750
+Wire Wire Line
+	4400 6000 4400 6200
+Wire Wire Line
+	4400 6200 4050 6200
+Text Label 4800 4800 0    50   ~ 0
+V12
+Text Label 4150 6200 0    50   ~ 0
+V3_3
+$EndSCHEMATC
