@@ -24,7 +24,7 @@
 
 // Pin assignment
 
-#define APIN 9              // PWM output, 980 Hz.
+#define APIN 9              // PWM output, 2 kHz.
 #define PS2CLK 12
 #define PS2DAT 11
 #define WAITLED LED_BUILTIN // pin for Wait LED
@@ -138,6 +138,9 @@ int nextArKey;
 const int8_t errB[] =
 { LS, H, S, T, S, T, S, T, LS, 0 };
 
+const int8_t errP[] =
+{ LS, T, S, H, S, H, S, T, LS, 0 };
+
 const int8_t errX[] =
 { LS, T, S, T, S, T, S, T, S, T, S, T, S, T, S, T, LS, 0 };
 
@@ -228,32 +231,41 @@ unsigned char ps2k_clk, ps2k_dat;
 /*
  * ps2k_init
  * initialize our interface to a PS2 keyboard.
- * Set the clock and data pins, and "claim" the clock to
- * make the keyboard buffer data.
+ *
+ * The normal inactive state of the keyboard interface is (a) CLK is
+ * output and driven LOW to block keyboard transmissions, (b) DATA is
+ * open-collector input and pulled up.
+ *
+ * Keyboard action functions that need to change any of this are
+ * expected to return things to their normal state on exit.
  */
 void ps2k_init (unsigned char clock, unsigned char data)
 {
     ps2k_clk = clock;
     ps2k_dat = data;
     pinMode(ps2k_clk, OUTPUT);
-    digitalWrite(ps2k_clk, HIGH);   /* Claim the clock */
+    digitalWrite(ps2k_clk, LOW);    /* Claim the clock */
     pinMode(ps2k_dat, INPUT_PULLUP);
-    digitalWrite(ps2k_dat, LOW);    /* Enable pullup */
+    digitalWrite(ps2k_dat, HIGH);   /* Enable pullup */
 }
 
 /*
- * ps2k_getcode
+ * _ps2k_getcode
  * Read a single keycode from a PS2 keyboard.  This may be a leadin
  * to a multi-symbol key, or an acknowledgement, or a key-release
  * event; we don't care at all.
  *
- * This is primarilly an internal subroutine; note that it does NOT
- * release the clock signal to enable the keyboard to send any data.
+ * This is only an internal subroutine; note that it does NOT release
+ * the clock signal to enable the keyboard to send any data.
+ *
+ * Interrupts should be disabled on entry; on exit they are still
+ * disabled.
  */
-unsigned char ps2k_getcode(void)
+static unsigned char _ps2k_getcode(void)
 {
-    unsigned char keycode, i;
+    unsigned char keycode, i, parity;
     unsigned long start = micros ();
+    unsigned char pin;
     
     // Wait for a Start bit, but not longer than a millisecond.  We do
     // this to avoid getting stuck in this function if the keyboard
@@ -268,21 +280,32 @@ unsigned char ps2k_getcode(void)
     }
     WAITHIGH(ps2k_clk);         /*  Discard start bit */
 
-    keycode = 0;
-    for (i=0; i<8; i++)         /* Read 8 data bits */
+    keycode = parity = 0;
+    for (i=0; i<10; i++)        /* Read 8 data bits, parity, stop */
     {
         WAITLOW(ps2k_clk);      /*   On each falling edge of clock */
-        keycode >>= 1;          /* LSB is sent first, shift in bits */
-        if (digitalRead(ps2k_dat) == HIGH)
-        {                       /*   from the MSB of the result */
-            keycode |= 0x80;
+        pin = digitalRead (ps2k_dat);
+        if (i < 8)
+        {
+            keycode >>= 1;      /* LSB is sent first, shift in bits */
+            if (pin == HIGH)
+            {                   /*   from the MSB of the result */
+                keycode |= 0x80;
+            }
+        }
+        if (i < 9 && pin == HIGH)
+        {
+            parity ^= 1;        /* Accumulate parity */
         }
         WAITHIGH(ps2k_clk);     /* prepare for next clock transition */
     }
-    WAITLOW(ps2k_clk);          /* get parity bit */
-    WAITHIGH(ps2k_clk);         /*  And ignore it! */
-    WAITLOW(ps2k_clk);          /* get stop bit */
-    WAITHIGH(ps2k_clk);         /*  Don't check it either! */
+    if (parity != 1)
+    {
+        // Parity error.  Report that to caller with a return value
+        // that isn't used as either a scan code or a status code.
+        keycode = 0xfb;
+        digitalWrite (PS2PE, HIGH);
+    }
     return(keycode);
 }
 
@@ -296,14 +319,22 @@ int ps2k_getkey(void)
     int result;
 
     result = 0;
+
+    noInterrupts ();
     pinMode(ps2k_clk, INPUT_PULLUP);
     digitalWrite(ps2k_clk, HIGH);  /* release ownership; let keybd send */
-    pinMode(ps2k_dat, INPUT_PULLUP);
-    digitalWrite(ps2k_dat, HIGH);  /* make sure data is also an input. */
 
-    result = ps2k_getcode();    /* Get one byte of keycode */
+    result = _ps2k_getcode();      /* Get one byte of keycode */
     pinMode(ps2k_clk, OUTPUT);
-    digitalWrite(ps2k_clk, LOW);  /* (stops keyboard from additional sends) */
+    digitalWrite(ps2k_clk, LOW);   /* (stops keyboard from additional sends) */
+    interrupts ();
+
+    // To make sure the keyboard sees the clock low, hold it for 200
+    // microseconds.  That ensures any transfer started right at the
+    // instance we gave up waiting is aborted rather than continuing
+    // if another poll happens immediately after exit.
+    delayMicroseconds (200);
+
     return result;
 }
 
@@ -314,6 +345,7 @@ int ps2k_getkey(void)
  * data, the keyboard does the clocking.  I had all sorts of troubles
  * with terminating the write, apparently solved by the insertion of
  * the "delayMicroseconds()" call after the parity bit.
+ *
  * Note that this routine does not process any response codes that the
  * keyboard might send.  They'll show up to ps2k_getkey and will need to
  * be ignorned (or not, as the case may be.)
@@ -323,13 +355,6 @@ void ps2k_sendbyte(unsigned char code)
     unsigned char parity = 0;       /* Get first byte */
     unsigned char i;
 
-    pinMode(ps2k_clk, OUTPUT);
-    digitalWrite(ps2k_clk, LOW);  /* (stops keyboard from additional sends) */
-    // To make sure the keyboard sees the clock low, hold it for 200
-    // microseconds.  That ensures it will work even if this function
-    // is called immediately after a keyboard poll.
-    delayMicroseconds (200);
-    
     pinMode(ps2k_dat, OUTPUT);
     digitalWrite(ps2k_dat, LOW);      /* Say we want to send data */
 
@@ -365,14 +390,21 @@ void ps2k_sendbyte(unsigned char code)
     WAITHIGH(ps2k_clk);
     WAITLOW(ps2k_clk);
 
-    pinMode(ps2k_dat, INPUT_PULLUP);
-    digitalWrite(ps2k_dat, HIGH);
-    delayMicroseconds(50);          /* This seems to be important! */
-    while (digitalRead(ps2k_clk) == LOW || digitalRead(ps2k_dat) == LOW)
-    ;                               /* Wait for keyboard to be done */
+    pinMode(ps2k_dat, INPUT_PULLUP); /* Switch back to input / OC mode */
+    digitalWrite(ps2k_dat, HIGH);   /* This sends the STOP bit */
 
+    WAITHIGH(ps2k_clk);             /* Wait for end of stop bit time */
+    WAITLOW(ps2k_clk);              /* Wait for ACK from keyboard */
+    /* TBD: should we look at the ACK signal? */
+    WAITHIGH(ps2k_clk);             /* Wait for end of ACK time */
     pinMode(ps2k_clk, OUTPUT);
     digitalWrite(ps2k_clk, LOW);      /*   stop additional transmitting */
+
+    // To make sure the keyboard sees the clock low, hold it for 200
+    // microseconds.  That ensures any transfer started just before
+    // this point is aborted rather than continuing if another poll
+    // happens immediately after exit.
+    delayMicroseconds (200);
 }
 
 // LK201 command buffer
@@ -719,6 +751,12 @@ void kbpoll (void)
     else if (scan == 0xfa)
     {
         // ack -- TODO
+        return;
+    }
+    else if (scan == 0xfb)
+    {
+        // Parity error
+        send_code (errP);
         return;
     }
     else if (scan >= 0xfc && scan <= 0xff)
