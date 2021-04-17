@@ -5,7 +5,7 @@ The `kicad` subdirectory contains two subdirectories, `lk201` for the USB emulat
 ## Creating the circuit board
 
 There are three ways to get a circuit board.
-1. From the shared designs section of the OSHPark PCB fabricator website.  You will there both the [USB board](https://oshpark.com/shared_projects/zDjWDDDL "LK201 emulator") and the [PS2 board](https://oshpark.com/shared_projects/TBD "LK201-PS2 emulator").
+1. From the shared designs section of the OSHPark PCB fabricator website.  You will there both the [USB board](https://oshpark.com/shared_projects/zDjWDDDL "LK201 emulator") and the [PS2 board](https://oshpark.com/shared_projects/FJsOFwzi "LK201-PS2 emulator").
 2. From any PCB fabricator that accepts KiCAD board files (such as OSHPark).
 3. From any PCB fabricator that doesn't, by generating the standard *Gerber* files.
 
