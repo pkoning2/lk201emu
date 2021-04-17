@@ -304,7 +304,6 @@ static unsigned char _ps2k_getcode(void)
         // Parity error.  Report that to caller with a return value
         // that isn't used as either a scan code or a status code.
         keycode = 0xfb;
-        digitalWrite (PS2PE, HIGH);
     }
     return(keycode);
 }
