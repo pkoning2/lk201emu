@@ -83,7 +83,7 @@ If you don't want the key click and beep (bell) features, omit LS1 and R1.
 
 Warning: there are two versions of the Itsy Bitsy, as there are with many of the AVR based Arduino microcontrollers.  One has 3.3 volt I/O, the other has 5 volt I/O.  The PS2 design requires the 5 volt version.  Do not use the 3.3 volt version, it will be destroyed when you plug in the DEC side serial cable since that supplies 12 volts to the board and the 3.3 volt Arduino has a regulator that can only handle 6 volt max power input.  And even if the regulator could handle it, driving a PS2 keyboard with 3.3 volt logic levels will not work.
 
-If you want to use Digikey as your supplier, the saved BOM is available [there](https://www.digikey.com/short/TBD "Digikey PS2 BOM").
+If you want to use Digikey as your supplier, the saved BOM is available [there](https://www.digikey.com/short/qbc941dj "Digikey PS2 BOM").
 
 ### Assembly suggestions
 
