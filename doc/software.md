@@ -11,7 +11,7 @@ An Arduino board such as the Adafruit Trinket M0 used in this project comes from
 The solution is in the boot loader built into the Trinket:
 1. Unplug the RJ22 serial cable (the connection to the DEC system).
 2. Connect the Trinket to your computer.  If this is not the first time programming it, the Trinket will get power but will not make a connection because both sides are in USB host mode.
-3. *Double click* the reset button.  The timing is slightly tricky; if done properly the small red LED next to the USB connector will blink.  At this point, a `TRINKETBOOT` device will appear (USB attached FAT file system).
+3. *Double click* the reset button.  The timing is slightly tricky; if done properly the small red LED next to the USB connector will blink (by slowly increasing and decreasing its intensity).  At this point, a `TRINKETBOOT` device will appear (USB attached FAT file system).
 4. To use the prebuilt binary `lk201.uf2`, copy (drag and drop) that into the TRINKETBOOT device.  
 5. Alternatively, use the Arduino SDK to compile and load the program source.
 
