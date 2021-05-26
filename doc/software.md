@@ -9,7 +9,7 @@ The `lk201` subdirectory contains the software for the USB emulator circuit boar
 An Arduino board such as the Adafruit Trinket M0 used in this project comes from the factory with a boot loader which is used to load the main program.  By default, the Trinket will connect as a device to the USB port of your computer.  But this emulator runs that same USB port in host (not device) mode, so after the initial programming it no longer talks directly to your PC or Mac by default.  The procedure given here also works fine for the initial load.
 
 The solution is in the boot loader built into the Trinket:
-1. Unplug the RS22 serial cable (the connection to the DEC system).
+1. Unplug the RJ22 serial cable (the connection to the DEC system).
 2. Connect the Trinket to your computer.  If this is not the first time programming it, the Trinket will get power but will not make a connection because both sides are in USB host mode.
 3. *Double click* the reset button.  The timing is slightly tricky; if done properly the small red LED next to the USB connector will blink.  At this point, a `TRINKETBOOT` device will appear (USB attached FAT file system).
 4. To use the prebuilt binary `lk201.uf2`, copy (drag and drop) that into the TRINKETBOOT device.  
