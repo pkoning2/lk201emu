@@ -26,7 +26,7 @@ Unplug the RJ22 serial cable (the connection to the DEC system), then plug in a 
 
 ### USB emulator board
 
-The `lk201.ino` source file is largely self contained.  To build it you will need the device libraries for the Adafruit Trinket M0 and the Adafruit ZeroTimer library, both of which the SDK can download for you.  You will also need the USB host library for SAMD based Arduino devices, available [on Github](https://github.com/gdsports/USB_Host_Library_SAMD "SAMD USB host library").
+The `lk201.ino` source file is largely self contained.  To build it you will need the device libraries for the Adafruit Trinket M0 and the Adafruit ZeroTimer and DotStar libraries, all of which the SDK can download for you through the Library Manager.  You will also need the USB host library for SAMD based Arduino devices, available [on Github](https://github.com/gdsports/USB_Host_Library_SAMD "SAMD USB host library").
 
 If you want to rebuild the `lk201.uf2` file, you will need the uf2conv.py utility available [on Github](https://github.com/microsoft.com "UF2 file format specification") in `utils/uf2conv.py`.  Proceed as follows:
 1. Compile the program.
