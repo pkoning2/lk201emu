@@ -46,6 +46,8 @@ If you don't want the key click and beep (bell) features, omit LS1, Q1, R1 and R
 
 If you want to use Digikey as your supplier, the saved BOM is available [there](https://www.digikey.com/short/zrhrcz "Digikey BOM").
 
+If you need alternate sources for various components, that should be no problem so long as the pinouts match.  For example, the MAX3232EPE transceiver has been reported as a valid alternative for U3.
+
 ### Assembly suggestions
 
 I found that this order of installing the components works well:
